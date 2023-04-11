@@ -29,10 +29,10 @@ func main() {
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if resp.StatusCode == 500 && strings.Contains(string(body), "NegotiateSecurityContext") {
-		fmt.Println("poc success")
+		fmt.Println("[+] The target might vulnerable")
 		fmt.Println("X-CalculatedBETarget:", resp.Header.Get("X-CalculatedBETarget"))
 		fmt.Println("X-FEServer:", resp.Header.Get("X-FEServer"))
 	} else {
-		fmt.Println("poc fail")
+		fmt.Println("[-] The target is not vulnerable.")
 	}
 }
