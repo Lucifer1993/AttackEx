@@ -52,9 +52,9 @@ func main() {
 	}
 
 	if resp.StatusCode == 302 {
-		fmt.Println("login success")
+		fmt.Println("[+] Login Success.")
 	} else {
-		fmt.Println("login fail")
+		fmt.Println("[-] Login Fail.")
 		return
 	}
 	resp.Body.Close()
@@ -76,8 +76,8 @@ func main() {
 	defer resp.Body.Close()
 
 	if resp.StatusCode == 500 {
-		fmt.Println("poc success, might be vulnerability")
+		fmt.Println("[+] The target might vulnerable.")
 	} else {
-		fmt.Println("poc fail")
+		fmt.Println("[-] The target is not vulnerable.")
 	}
 }
