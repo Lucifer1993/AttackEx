@@ -41,11 +41,11 @@ func main() {
 
 	respcode := doc.FindElement("//resp")
 	if respcode != nil && respcode.Text() == "NoError" {
-		fmt.Println("poc success, might be vulnerability")
-		fmt.Println("response:")
+		fmt.Println("[+] The target might vulnerable.")
+		fmt.Println("Response:")
 		fmt.Println(string(body))
 	} else {
-		fmt.Println("poc fail")
+		fmt.Println("[-] The target is not vulnerable.")
 	}
 }
 
